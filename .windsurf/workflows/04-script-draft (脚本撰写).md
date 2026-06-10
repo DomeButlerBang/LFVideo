@@ -165,4 +165,4 @@ source_workflow: /04-script-draft
 
 - 角色：`shared/roles/content/copywriter(文案撰稿人).md`
 - 上游：`03-video-planning-bilibili (B站视听策划).md`
-- 下游：`05-video-assembly (视频组装).md`
+- 下游：`05-b-roll-recording (B轨录屏).md`、`06-tts-synthesis (TTS语音合成).md`

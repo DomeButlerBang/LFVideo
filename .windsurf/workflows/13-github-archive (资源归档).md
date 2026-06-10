@@ -2,15 +2,15 @@
 description: 资源归档 - 清理开发过程中的临时文件与缓存，整理出干净、优雅的开源代码，打包 Prompts 与 Rules，撰写面向社区的高质量 README，并将配套资源同步至 GitHub 仓库。
 ---
 
-# 资源归档 Workflow (07-github-archive)
+# 资源归档 Workflow (13-github-archive)
 
-本工作流由**执行工程师**角色执行。其目的是在视频成片并分发（06）之后，**对 GitHub 资源库进行专业化整理与发布**，为观众提供极佳的"课后配套开源代码与规则模板"下载体验。
+本工作流由**执行工程师**角色执行。其目的是在视频成片并分发（12）之后，**对 GitHub 资源库进行专业化整理与发布**，为观众提供极佳的"课后配套开源代码与规则模板"下载体验。
 
 ---
 
 ## 前置依赖
 
-本工作流假设已完成 `/06-distribute-adapt`，且视频已基本就绪或已发布。
+本工作流假设已完成 `/12-distribute-adapt`，且视频已基本就绪或已发布。
 
 ---
 
@@ -59,12 +59,12 @@ content-library/<epNN-slug>/
 
 ### 6. 输出归档记录
 
-在 `content-library/<epNN-slug>/07-archive/README.md`（或 `README.md` 本身）中打上归档标识：
+在 `content-library/<epNN-slug>/13-archive/README.md`（或 `README.md` 本身）中打上归档标识：
 ```markdown
 ---
-stage: 07-github-archive
+stage: 13-github-archive
 status: draft
-source_workflow: /07-github-archive
+source_workflow: /13-github-archive
 ---
 
 # epNN 配套资源归档记录
@@ -77,12 +77,12 @@ source_workflow: /07-github-archive
 ```
 
 ### 7. 归档状态更新
-- 写入 `content-library/<epNN-slug>/07-archive/README.md`。
-- 在 `content-library/PIPELINE.md` 中的 07 列置为 `approved`（完结）。
+- 写入 `content-library/<epNN-slug>/13-archive/README.md`。
+- 在 `content-library/PIPELINE.md` 中的 13 列置为 `approved`（完结）。
 
 ---
 
 ## 关联文件
 
 - 角色：`shared/roles/execution/engineer(执行工程师).md`
-- 上游：`06-distribute-adapt (分发适配).md`
+- 上游：`12-distribute-adapt (分发适配).md`

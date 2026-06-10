@@ -2,20 +2,21 @@
 description: 视频组装 - 调用视频工程师角色，用 Remotion 把脚本组装成可渲染成片。
 ---
 
-# 视频组装 Workflow (05-video-assembly)
+# 视频组装 Workflow (07-video-assembly)
 
-基于 `/04-script-draft` 输出的定稿脚本，调用 `视频工程师` 角色，用 Remotion（`video/` 工程）把脚本组装成片：A 轨概念动画全自动，B 轨套模板合成录屏素材。
+基于上游定稿脚本（04）、B 轨录屏素材（05）、TTS 语音音频（06），调用 `视频工程师` 角色，用 Remotion（`video/` 工程）把脚本组装成片：A 轨概念动画全自动，B 轨套模板合成录屏素材。
 
 ---
 
 ## 前置依赖
 
-本工作流假设已完成 `/04-script-draft`，已具备：
+本工作流假设已完成 `/04-script-draft`、`/05-b-roll-recording`、`/06-tts-synthesis`，已具备：
 - 处于 `approved` 状态的 `content-library/<epNN-slug>/04-script/README.md`
 - 每段含 **A/B 轨标识** 与分镜画面
-- （B 轨）人工录屏素材 + 口播音频已就绪
+- （B 轨）录屏素材已就绪：`content-library/<epNN-slug>/05-b-roll/assets/`
+- TTS 口播音频已就绪：`content-library/<epNN-slug>/06-tts/assets/`
 
-如果缺少上述输入，先提示用户回到 `/04-script-draft`。
+如果缺少上述输入，先提示用户回到对应上游阶段。
 
 ---
 
@@ -97,19 +98,19 @@ video/src/
 ### 9. 落盘归档
 
 前置：`content-library/<epNN-slug>/04-script/README.md` 已 `approved`。
-- 组装记录写入：`content-library/<epNN-slug>/05-assembly/README.md`（`stage: 05-video-assembly` / `status: draft`）
+- 组装记录写入：`content-library/<epNN-slug>/07-assembly/README.md`（`stage: 07-video-assembly` / `status: draft`）
 - 记录内容：Remotion 资源路径、场景编排表、渲染命令、成片输出路径（`video/out/<slug>.mp4`）
-- 成片 MP4 留在 `video/out/`；05-assembly/README.md 只记录链接，不复制大文件。
-- 更新 `PIPELINE.md`：该期 05 列置 `draft`
+- 成片 MP4 留在 `video/out/`；07-assembly/README.md 只记录链接，不复制大文件。
+- 更新 `PIPELINE.md`：该期 07 列置 `draft`
 
 ### 10. 交付与下一步
 输出交付清单（成片 MP4 + 源工程路径 + 字幕），并提示：
-> 成片满意（看板标 `approved`）后可执行 `/06-distribute-adapt` 做多平台标题 / 描述 / 标签适配与分发。
+> 成片满意（看板标 `approved`）后可执行 `/08-subtitle-gen` 生成字幕，再经 `/09-bgm-mix`、`/10-cover-gen`、`/11-qa-review` 完成后期，最后 `/12-distribute-adapt` 做多平台分发。
 
 ---
 
 ## 关联文件
 
 - 角色：`shared/roles/execution/motion-engineer(视频工程师).md`
-- 上游：`04-script-draft (脚本撰写).md`
-- 下游：`06-distribute-adapt (分发适配).md`
+- 上游：`04-script-draft (脚本撰写).md`、`05-b-roll-recording (B轨录屏).md`、`06-tts-synthesis (TTS语音合成).md`
+- 下游：`08-subtitle-gen (字幕生成).md`
