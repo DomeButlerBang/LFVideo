@@ -8,14 +8,15 @@
 - `draft` 已产出，待审核
 - `reviewed` 审核中
 - `approved` 通过，可进下一阶段
+- `suspended` 暂时挂起（阶段定义已就绪，当前不执行）
 
 ## 进度表
 
-| 期 | 01 选题 | 02 策划 | 03 B站视听 | 04 脚本 | 05 B轨录屏 | 06 TTS | 07 组装 | 08 字幕 | 09 BGM | 10 封面 | 11 质检 | 12 分发 | 13 归档 | 备注 |
+| 期 | 01 选题 | 02 策划 | 03 B站视听 | 04 脚本 | 05 B轨录屏 ⏸ | 06 TTS | 07 组装 | 08 字幕 | 09 BGM ⏸ | 10 封面 ⏸ | 11 质检 ⏸ | 12 分发 ⏸ | 13 归档 ⏸ | 备注 |
 |----|---------|---------|------------|---------|----------|--------|---------|--------|-------|--------|--------|--------|--------|------|
 | **系列一：AI 视频自动化** | | | | | | | | | | | | | | |
 | ep01-video-agent-overview | approved | approved | approved | approved | - | - | approved | - | - | - | - | approved | approved | 总体构建：IDE 智能体 + Python 工具 + React 编译器 (已完结) |
-| ep02-video-render | approved | approved | draft | draft | - | - | draft | - | - | - | - | draft | - | 渲染引擎：代码即视频 + 流程即代码 (本期) |
+| ep02-video-render | approved | approved | draft | draft | suspended | - | draft | - | suspended | suspended | suspended | suspended | suspended | 渲染引擎：代码即视频 + 流程即代码 (本期) |
 | ep03-video-subtitle | - | - | - | - | - | - | - | - | - | - | - | - | - | 字幕卡点：Whisper 毫秒级时间戳驱动 React 弹跳字幕 |
 | ep04-video-orchestrator | - | - | - | - | - | - | - | - | - | - | - | - | - | 智能体编排：YAML 管道与 Markdown 导演规则指挥 Agent |
 | **系列二：PPT 演示文稿自动化** | | | | | | | | | | | | | | |
