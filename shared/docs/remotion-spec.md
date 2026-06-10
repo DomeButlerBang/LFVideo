@@ -1,7 +1,11 @@
 # Remotion 视频模板与分镜规范 (Remotion Specification)
 
-本规范定义了当前 Remotion 工程（`video/`）中已经实现、可直接调用的 UI 组件、场景与动画能力。
-在进行 **02 内容策划**与 **04 脚本撰写**时，必须**100% 严格遵守本规范进行画面设计**，确保 AI 编写的脚本画面在本地“一键可渲染”，杜绝幻想不切实际的特效。
+> ⚠️ **真相源对齐（必读）**：本文下文以 `video/src/template/` 路径、`@IntroScene/@OutroScene/@ConceptScene/@SplitLayout/@VideoSlot/@AnimatedBackground` 描述的组件属于**目标态规范（尚未实现）**。
+> **当前实际落地**：仓库内**无 `video/` 工程**；A 轨组件位于 `OpenMontage/remotion-composer/src/components/`，实际组件名与下文不同（见§1.9 对照表）。
+> 因此在 **02 策划 / 04 脚本** 中引用组件与命令时，必须先按 §1.9 映射到实际组件，并在录制前核对 props；未核对的画面/命令一律标 `paper_spec`。
+
+本规范定义了 Remotion 工程中（目标态）可调用的 UI 组件、场景与动画能力。
+在进行 **02 内容策划**与 **04 脚本撰写**时，必须**严格遵守本规范的设计原则与防静止红线进行画面设计**，并按 §1.9 映射到实际组件，确保画面可渲染，杜绝幻想不切实际的特效。
 
 ---
 
@@ -38,9 +42,31 @@
 
 ---
 
-## 2. 现成可用组件库清单
+## 1.9 目标态规范 ↔ 实际组件对照表（录制前必核对）
 
-目前在 `video/src/template/` 下已封装好的、可一键在数据源 `data.ts` 里配置的组件：
+实际组件位于 `OpenMontage/remotion-composer/src/components/`（以 `index.ts` 导出为准）。下表是「目标态规范名 → 当前最接近的实际组件」的参考映射，props 以实际组件为准：
+
+| 目标态规范名 | 当前实际组件（`remotion-composer/src/components/`） | 备注 |
+| :--- | :--- | :--- |
+| `@IntroScene` | `HeroTitle` / `SectionTitle` | 开场大字报 |
+| `@OutroScene` | `EndTag` | 片尾 CTA |
+| `@ConceptScene` | `TextCard` / `StatCard` / `CalloutBox` 组合 | 无单一同名组件，需组合表达 |
+| `@SplitLayout` | （暂无直接等价） | 左右对比可用 `ComparisonCard` |
+| `@VideoSlot` | `ScreenshotScene`（截图/变焦） | B 轨外部资产嵌入 |
+| `@AnimatedBackground` | `ParticleOverlay` | 背景/粒子 |
+| （图表） | `charts/`、`StatReveal`、`ProgressBar` | 标题承诺的“图表动效” |
+| （字幕） | `CaptionOverlay` | 逐字高亮叠层 |
+| （终端） | `TerminalScene` | 命令/报错演示 |
+| （对比卡） | `ComparisonCard` | 左右对比 |
+
+> 实际组件完整清单（截至当前）：`AnimeScene` `CalloutBox` `CaptionOverlay` `ComparisonCard` `EndTag` `HeroTitle` `ParticleOverlay` `ProductReveal` `ProgressBar` `ProviderChip` `ScreenshotScene` `SectionTitle` `StatCard` `StatReveal` `TerminalScene` `TextCard` `charts/`。
+> 若后续真建立 `video/` 工程并实现下述同名组件，再将本表收敛为一致。
+
+---
+
+## 2. 现成可用组件库清单（目标态规范，名称以 §1.9 映射为准）
+
+目标态在 `video/src/template/` 下计划封装、可在数据源 `data.ts` 里配置的组件（实际调用请按 §1.9 映射到 `remotion-composer` 组件）：
 
 ### 2.1 基础场景组件 (Scenes)
 
