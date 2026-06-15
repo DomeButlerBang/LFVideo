@@ -11,278 +11,235 @@ upstream_inputs:
 
 # ep02 视频组装方案
 
-> **唯一真源 = 04 脚本（approved）。** 本组装方案逐条映射 04 契约块的 16 段 `sections[]`（禁止增删/合并/改写/重排），B 轨三镜逐条来自 `05-b-roll/README.md`；本期 B 轨 `suspended`，全部以 A 轨兜底。
+> ⚠️ **重做版（对齐新 04 脚本 + 06 重合成）**：本组装方案逐条映射 04 契约块的 **13 段 `sections[]`**（id 1–13，禁止增删/合并/改写/重排），音轨为 06 重合成的 13 段 WAV（按 `manifest.json` 实测时长排时间轴）。旧的 16 场景（`帧即状态/七阶段流水线/三件套/编排器伪代码`，含 `@TimelineScene`）已删除，归 EP05/EP06。B 轨逐条来自 `05-b-roll`（本期 `suspended`，全部以 A 轨兜底）。
 
 ## 制作概要
 
 | 维度 | 值 |
 |------|---|
 | **轨道** | A 轨为主（概念动画全自动），B 轨挂起（A 轨兜底） |
-| **时长** | ~9:18 纯内容（06-TTS 实合成 558s + 画面过渡）；04 估时 10:45（645s）为参考上限 |
+| **时长** | **363.90s（6 分 04 秒）** = 06-TTS 13 段实测时长累加（Piper 样片；切 CosyVoice 3 重合成后微调） |
 | **分辨率** | 1920×1080 @ 30fps（B站 16:9 主版本） |
-| **复用模板** | IntroScene / OutroScene / ConceptScene / TableScene / TimelineScene / SplitLayout / TerminalScene |
+| **复用模板** | IntroScene / ConceptScene / TableScene / SplitLayout / TerminalScene / ScreenshotScene / ComparisonCard / OutroScene |
 | **新增组件** | 无（全复用 remotion-spec.md §1.9 已有组件） |
 
 ---
 
 ## Remotion 结构（场景编排表）
 
-| # | 04 段落 | 时间区间 | 场景 | 组件 | 数据来源 | 轨道 / B 轨素材 |
-|---|--------|---------|------|------|---------|------|
-| 1 | 1 | 0:00–0:30 | 开头钩子 | `@IntroScene` | S1_intro.wav + title/subtitle props | A |
-| 2 | 2a | 0:30–1:13 | 范式与痛点 | `@ConceptScene` | S2a_paradigm.wav + bullet_points | A |
-| 3 | 2b | 1:13–1:34 | 帧即状态 | `@ConceptScene` | S2b_frame_as_state.wav + diagram_data | A |
-| 4 | 2c | 1:34–2:18 | 六条路线 | `@TableScene` | S2c_six_routes.wav + matrix_data | A |
-| 5 | 3a | 2:18–3:19 | 判断层矩阵 | `@TableScene` | S3a_judgment_matrix.wav + evaluation_data | A |
-| 6 | 3b | 3:19–4:00 | 选型四理由 | `@ConceptScene` | S3b_remotion_reasons.wav + reasons_list | A |
-| 7 | 3c | 4:00–4:21 | Remotion vs HyperFrames | `@SplitLayout(@ComparisonCard)` | S3c_comparison.wav + comparison_data | A |
-| 8 | 3d | 4:21–4:49 | 选型代价 | `@ConceptScene` | S3d_tradeoffs.wav + tradeoff_points | A |
-| 9 | 4a | 4:49–5:20 | 七阶段流水线 | `@TimelineScene` | S4a_pipeline.wav + stages_array | A |
-| 10 | 4b | 5:20–5:44 | 三件套 | `@ConceptScene` | S4b_three_piece.wav + three_piece_data | A |
-| 11 | 4c | 5:44–6:08 | 编排器伪代码 | `@TerminalScene` | S4c_orchestrator.wav + code_snippet | A |
-| 12 | 4d | 6:08–6:49 | A/B轨机制 | `@SplitLayout` | S4d_ab_track.wav + ab_comparison | A |
-| 13 | 5a | 6:49–7:23 | 数据驱动 vs 手写 | `@SplitLayout(@ComparisonCard)` | S5a_data_driven.wav + code_comparison | A（B轨 `b-ide-data-driven` 兜底） |
-| 14 | 5b | 7:23–8:06 | SSR守卫 | `@SplitLayout` + `@TerminalScene` | S5b_ssr_guard.wav + guard_code | A（B轨 `b-ide-ssr-guard` 兜底） |
-| 15 | 5c | 8:06–8:45 | AI出片 | `@ConceptScene` + `@TerminalScene` | S5c_ai_render.wav + render_commands | A（B轨 `b-terminal-render` 兜底） |
-| 16 | 6 | 8:45–9:18 | 结尾CTA | `@OutroScene` | S6_cta.wav + cta_props | A |
+| # | 04 段 | 音轨段 | 时间区间 | 场景 | 组件 | 轨道 / B 轨素材 |
+|---|------|-------|---------|------|------|------|
+| 1 | 1 | S01_open | 0:00–0:39 | 开场钩子 | `@IntroScene` | A |
+| 2 | 2 | S02_routes_intro | 0:39–0:57 | 选路线①·共同内核 | `@ConceptScene` | A |
+| 3 | 3 | S03_six_routes | 0:57–1:30 | 选路线①·六条路线 | `@ConceptScene` | A |
+| 4 | 4 | S04_pitfalls | 1:30–2:20 | 选路线②·不适用+坑 | `@TableScene` | A（B轨 `b-ide-route-pitfalls` 兜底） |
+| 5 | 5 | S05_why_remotion | 2:20–2:46 | 选路线②·为什么 Remotion | `@ConceptScene` | A |
+| 6 | 6 | S06_vs_html | 2:46–3:11 | 选路线②·vs 复制粘贴 HTML | `@SplitLayout(@ComparisonCard)` | A |
+| 7 | 7 | S07_dispatch | 3:11–3:38 | 搭引擎①·配置分发 | `@ConceptScene` | A |
+| 8 | 8 | S08_config | 3:38–3:56 | 搭引擎①·配置即内容 | `@TerminalScene` | A |
+| 9 | 9 | S09_fill_vs_build | 3:56–4:23 | 搭引擎①·造组件 vs 填数据 | `@SplitLayout` | A（B轨 `b-ide-config-fill` 兜底） |
+| 10 | 10 | S10_avatar | 4:23–4:51 | 搭引擎②·数字主持人基础版 | `@ScreenshotScene` | A |
+| 11 | 11 | S11_ssr | 4:51–5:25 | 搭引擎②·SSR 避坑 | `@SplitLayout` + `@TerminalScene` | A（B轨 `b-ide-ssr-crash`/`b-ide-ssr-fix` 兜底） |
+| 12 | 12 | S12_render | 5:25–5:44 | 搭引擎②·一行出片 | `@TerminalScene` | A（B轨 `b-term-render` 兜底） |
+| 13 | 13 | S13_cta | 5:44–6:04 | 结尾 CTA | `@OutroScene` | A |
 
-> 上表 16 行与 04 脚本 `sections[]` 的 16 段（id：1 / 2a / 2b / 2c / 3a / 3b / 3c / 3d / 4a / 4b / 4c / 4d / 5a / 5b / 5c / 6）**一一对应**，不增删、不合并、不改写。时间区间基于 TTS 合成时长 + 2s 场景过渡，总计约 9:18 纯内容 + 过渡 ≈ 10:00。
+> 上表 13 行与 04 脚本 `sections[]` 的 13 段（id 1–13）**一一对应**，不增删、不合并、不改写。时间区间 = 06-TTS 各段实测时长累加（见 `06-tts/manifest.json`），总计 363.90s。
 
 ---
 
 ## data.ts 结构设计
 
 ```typescript
-// video/src/episodes/ep02-video-render/data.ts
+// OpenMontage/remotion-composer/src/episodes/ep02-video-render/data.ts
 
-import type { EpisodeData, SceneConfig } from '../../template';
+import type { EpisodeData } from '../../template';
 
 export const ep02Data: EpisodeData = {
   meta: {
     id: 'ep02-video-render',
-    title: '代码即视频（Video-as-Code）',
-    subtitle: '【AI 视频自动化生产线】第 2 期：渲染引擎篇',
+    title: '不写代码，用 Vibe Coding 搭一套能自动出片的视频渲染引擎',
+    subtitle: '《Vibe Coding 造一条自动化视频生产线》EP02 · 视频渲染',
     fps: 30,
     width: 1920,
     height: 1080,
   },
   audio: {
-    // TTS 合成音频，按段落 ID 对应
+    // 06-TTS 13 段，startSec = 前序段实测时长累加（manifest.json）
     segments: [
-      { id: 'S1_intro', file: './assets/S1_intro.wav', startSec: 0 },
-      { id: 'S2a_paradigm', file: './assets/S2a_paradigm.wav', startSec: 30 },
-      { id: 'S2b_frame_as_state', file: './assets/S2b_frame_as_state.wav', startSec: 73 },
-      { id: 'S2c_six_routes', file: './assets/S2c_six_routes.wav', startSec: 94 },
-      { id: 'S3a_judgment_matrix', file: './assets/S3a_judgment_matrix.wav', startSec: 138 },
-      { id: 'S3b_remotion_reasons', file: './assets/S3b_remotion_reasons.wav', startSec: 199 },
-      { id: 'S3c_comparison', file: './assets/S3c_comparison.wav', startSec: 240 },
-      { id: 'S3d_tradeoffs', file: './assets/S3d_tradeoffs.wav', startSec: 261 },
-      { id: 'S4a_pipeline', file: './assets/S4a_pipeline.wav', startSec: 289 },
-      { id: 'S4b_three_piece', file: './assets/S4b_three_piece.wav', startSec: 320 },
-      { id: 'S4c_orchestrator', file: './assets/S4c_orchestrator.wav', startSec: 344 },
-      { id: 'S4d_ab_track', file: './assets/S4d_ab_track.wav', startSec: 368 },
-      { id: 'S5a_data_driven', file: './assets/S5a_data_driven.wav', startSec: 409 },
-      { id: 'S5b_ssr_guard', file: './assets/S5b_ssr_guard.wav', startSec: 443 },
-      { id: 'S5c_ai_render', file: './assets/S5c_ai_render.wav', startSec: 486 },
-      { id: 'S6_cta', file: './assets/S6_cta.wav', startSec: 525 },
+      { id: 'S01_open',         file: './assets/S01_open.wav',         startSec: 0 },
+      { id: 'S02_routes_intro', file: './assets/S02_routes_intro.wav', startSec: 39.28 },
+      { id: 'S03_six_routes',   file: './assets/S03_six_routes.wav',   startSec: 57.12 },
+      { id: 'S04_pitfalls',     file: './assets/S04_pitfalls.wav',     startSec: 89.87 },
+      { id: 'S05_why_remotion', file: './assets/S05_why_remotion.wav', startSec: 140.23 },
+      { id: 'S06_vs_html',      file: './assets/S06_vs_html.wav',      startSec: 166.12 },
+      { id: 'S07_dispatch',     file: './assets/S07_dispatch.wav',     startSec: 191.06 },
+      { id: 'S08_config',       file: './assets/S08_config.wav',       startSec: 217.61 },
+      { id: 'S09_fill_vs_build',file: './assets/S09_fill_vs_build.wav',startSec: 236.19 },
+      { id: 'S10_avatar',       file: './assets/S10_avatar.wav',       startSec: 262.70 },
+      { id: 'S11_ssr',          file: './assets/S11_ssr.wav',          startSec: 290.60 },
+      { id: 'S12_render',       file: './assets/S12_render.wav',       startSec: 324.84 },
+      { id: 'S13_cta',          file: './assets/S13_cta.wav',          startSec: 343.83 },
     ],
   },
   scenes: [
     {
-      id: 'S1',
-      component: 'IntroScene',
-      durationSec: 30,
+      id: 'S01', component: 'IntroScene', durationSec: 39.28,
       props: {
-        title: '代码即视频（Video-as-Code）',
-        subtitle: '【AI 视频自动化生产线】第 2 期：渲染引擎篇',
+        title: '不写代码，用 Vibe Coding 搭一套能自动出片的视频渲染引擎',
+        subtitle: '《Vibe Coding 造一条自动化视频生产线》EP02 · 视频渲染',
+        roadmap: ['第一步：选技术路线', '第二步：搭渲染引擎'],
         background: 'particles',
       },
     },
     {
-      id: 'S2a',
-      component: 'ConceptScene',
-      durationSec: 43,
+      id: 'S02', component: 'ConceptScene', durationSec: 17.84,
       props: {
-        heading: '传统剪辑 vs Video-as-Code',
-        bullets: [
-          '传统：轨道 + 绝对时间轴 → 低 ROI 体力活',
-          'VaC 三特性：可版本控制 / 可参数化批量复用 / AI 友好',
+        eyebrow: '第一步 · 选路线',
+        heading: '先让 AI 把路都摆出来',
+        items: [
+          { label: 'INPUT', title: '用代码/数据描述画面' },
+          { label: 'COMPILE', title: '程序编译成帧' },
+          { label: 'OUTPUT', title: '合成视频' },
         ],
-        animation: 'fade_bullet_sequence',
+        animation: 'flow_arrows',
       },
     },
     {
-      id: 'S2b',
-      component: 'ConceptScene',
-      durationSec: 21,
+      id: 'S03', component: 'ConceptScene', durationSec: 32.75,
       props: {
-        heading: '帧即状态（Frame as State）',
-        diagram: 'code_data → renderer → frames → video',
-        animation: 'flow_diagram',
+        heading: 'AI 摆出的六条路线',
+        items: [
+          { title: '网页渲染 · Remotion', desc: 'React 组件+CSS，无头浏览器逐帧截图' },
+          { title: 'Motion Canvas/Revideo', desc: '写函数描述动画时序' },
+          { title: 'Manim', desc: 'Python 描述几何/公式' },
+          { title: 'MoviePy', desc: 'Python 操作像素+FFmpeg' },
+          { title: 'PixiJS/Cocos', desc: 'Canvas 上逐帧画' },
+          { title: 'FFmpeg+脚本', desc: '命令行合成' },
+        ],
+        footer: '同一内核：把画面编译成帧',
+        animation: 'stagger_cards',
       },
     },
     {
-      id: 'S2c',
-      component: 'TableScene',
-      durationSec: 44,
+      id: 'S04', component: 'TableScene', durationSec: 50.36,
       props: {
-        title: '六条技术路线',
-        columns: ['路线', '描述层', '渲染层', '适用场景'],
+        eyebrow: "人盯着'坑'那列做减法",
+        title: '六个方案的适合/不适合/已知坑',
+        columns: ['方案', '适合', '不适合', '已知的坑'],
         rows: [
-          ['Remotion', 'React/TSX', 'Puppeteer截图', '复杂排版+模板复用'],
-          ['Motion Canvas', 'TypeScript', '声明式动画', '代码演示+时序'],
-          ['Manim', 'Python', '几何渲染', '数学可视化'],
-          ['MoviePy', 'Python', 'NumPy+FFmpeg', '简单拼接'],
-          ['PixiJS/Cocos', 'JS/TS', 'Canvas', '粒子/游戏效果'],
-          ['FFmpeg', 'CLI', 'filtergraph', '批量转码/字幕'],
+          ['Remotion', '前端栈、复杂排版、跨期复用', '纯后台超长批处理', '组件顶层读浏览器对象会在打包阶段崩；BUSL 授权'],
+          ['Motion Canvas/Revideo', '代码演示、精确时序', '复杂网页排版', '生态小、模板要自攒'],
+          ['Manim', '数学/公式/算法', '普通 UI、网页排版', '学习陡、排版弱、渲染慢'],
+          ['MoviePy', '纯 Python、简单拼接', '自适应排版、复杂文字动效', '文字排版繁琐、多层吃内存'],
+          ['PixiJS/Cocos', '游戏类粒子动画', '标准网页 UI、文字对齐', '换行/对齐计算复杂'],
+          ['FFmpeg+脚本', '批量转码、兜底合成', '复杂动效、交互排版', '命令晦涩、难调试'],
         ],
         highlight_row: 0,
+        highlight_column: 3,
       },
     },
     {
-      id: 'S3a',
-      component: 'TableScene',
-      durationSec: 60,
+      id: 'S05', component: 'ConceptScene', durationSec: 25.89,
       props: {
-        title: '判断层矩阵',
-        columns: ['方案', '适用', '不适用/坑'],
-        rows: [
-          ['Remotion', '前端栈复杂排版、跨期模板', '零前端基础、window顶层读取、BUSL'],
-          ['Motion Canvas', '时序动画', '网页级Flex排版'],
-          ['Manim', '数学可视化', '学习曲线陡、排版弱'],
-          ['MoviePy', '简单拼接', '复杂文字动效'],
-          ['PixiJS', '游戏级粒子', '文本对齐'],
-          ['FFmpeg', '批量转码', 'filtergraph可读性'],
-        ],
-      },
-    },
-    {
-      id: 'S3b',
-      component: 'ConceptScene',
-      durationSec: 42,
-      props: {
-        heading: 'Remotion 胜出四理由',
-        bullets: [
-          '① 数据驱动模板（决定性）— 类型安全跨期复用',
-          '② AI 友好 — 只填数据和微调CSS',
-          '③ CLI 原生 — npx remotion render 一行出片',
-          '④ 网页生态红利 — CSS/SVG/Flexbox 随手可用',
+        eyebrow: '回到我自己的约束',
+        heading: '为什么是 Remotion',
+        items: [
+          { label: '模板', title: '固定模板换数据就复用', desc: '改一处主题全系列生效' },
+          { label: 'AI', title: '让 AI 接手最稳', desc: '只填数据、套现成组件，最不容易出错' },
+          { label: 'CLI', title: '一行命令就出片', desc: 'npx remotion render' },
+          { label: 'WEB', title: '网页生态现成可用', desc: 'CSS/动效/图表库随手拿' },
         ],
         animation: 'number_highlight_sequence',
       },
     },
     {
-      id: 'S3c',
-      component: 'SplitLayout',
-      durationSec: 21,
+      id: 'S06', component: 'SplitLayout', durationSec: 24.94,
       props: {
-        left: { component: 'ComparisonCard', title: 'Remotion ✅', points: ['TypeScript约束', '跨期类型安全', 'AI只填数据'] },
-        right: { component: 'ComparisonCard', title: 'HyperFrames ❌', points: ['HTML无类型', '结构漂移', '维护灾难'] },
+        left:  { component: 'ComparisonCard', title: '✅ Remotion', status: 'success',
+                 points: ['模板复用：改一处全系列生效', '让 AI 接手：结构稳、只填数据', '长期维护：十期后还能管'] },
+        right: { component: 'ComparisonCard', title: '❌ 复制粘贴 HTML', status: 'error',
+                 points: ['每期复制改、越改越乱', '结构容易跑偏', '十期后维护是灾难'] },
+        footer: '代价如实说：React 栈 + BUSL 授权（规模化商用要付费）',
       },
     },
     {
-      id: 'S3d',
-      component: 'ConceptScene',
-      durationSec: 28,
+      id: 'S07', component: 'ConceptScene', durationSec: 26.55,
       props: {
-        heading: '选型代价（如实交代）',
-        bullets: [
-          'React技术栈 → AI写组件，人把控架构',
-          'BUSL商业授权 → 当前规模无影响',
-          'SSR环境约束 → MDC规则一次封死',
+        eyebrow: '第二步 · 搭引擎',
+        heading: '一份配置 → Explainer 按 type 分发 → 现成组件',
+        items: [
+          { label: 'comparison', title: '→ ComparisonCard 对比卡' },
+          { label: 'terminal_scene', title: '→ 合成终端：逐行打字，不用真录屏' },
+          { label: 'screenshot_scene', title: '→ 截图叠光标/点击/打字' },
+          { label: 'charts', title: '→ 柱/线/饼图、KPI' },
+          { label: 'ConceptScene/SplitLayout', title: '→ 概念图解/左右分屏' },
         ],
-        animation: 'cross_fade',
+        animation: 'dispatch_flow',
       },
     },
     {
-      id: 'S4a',
-      component: 'TimelineScene',
-      durationSec: 31,
+      id: 'S08', component: 'TerminalScene', durationSec: 18.58,
       props: {
-        title: '七阶段生产流水线',
-        stages: ['01 选题', '02 策划', '03 视听', '04 脚本', '05 组装', '06 分发', '07 归档'],
-        active_stage: 4,
-        animation: 'sequential_highlight',
-      },
-    },
-    {
-      id: 'S4b',
-      component: 'ConceptScene',
-      durationSec: 24,
-      props: {
-        heading: '三件套',
-        bullets: [
-          '角色 = system_prompt',
-          '工作流 = user_prompt',
-          'frontmatter = 状态机',
-        ],
-        animation: 'stack_build',
-      },
-    },
-    {
-      id: 'S4c',
-      component: 'TerminalScene',
-      durationSec: 24,
-      props: {
-        title: '最小编排器伪代码',
-        language: 'python',
-        code: `import frontmatter\nfor doc in glob("content-library/**/README.md"):\n  meta = frontmatter.load(doc)\n  if meta["status"] == "approved":\n    next_stage = get_next(meta["stage"])\n    role = load_role(next_stage)\n    workflow = load_workflow(next_stage)\n    llm.run(system=role, user=workflow)`,
+        title: '只写配置：一个 comparison',
+        language: 'jsonc',
+        code: `{
+  "type": "comparison",
+  "title": "传统剪辑 vs 代码即视频",
+  "leftLabel": "传统剪辑",  "leftValue": "拖时间轴，改一处全手工重排",
+  "rightLabel": "代码即视频", "rightValue": "改一行配置，重新编译出片"
+}`,
         typing_speed: 'medium',
       },
     },
     {
-      id: 'S4d',
-      component: 'SplitLayout',
-      durationSec: 41,
+      id: 'S09', component: 'SplitLayout', durationSec: 26.51,
       props: {
-        left: { title: 'A轨（全自动）', description: 'AI生成数据 → Remotion渲染 → 零人工' },
-        right: { title: 'B轨（真人录屏）', description: 'TAD-01 强制真录 → 挂起等待 → 素材到位后合成' },
-      },
-    },
-    {
-      id: 'S5a',
-      component: 'SplitLayout',
-      durationSec: 33,
-      props: {
-        left: { component: 'ComparisonCard', title: '❌ 从零手写', points: ['新建ComparisonScene.tsx', '手写布局/样式/动画', '违反模板复用原则'] },
-        right: { component: 'ComparisonCard', title: '✅ 数据驱动', points: ['产出data对象', '丢给ComparisonCard', '下期只换数据'] },
+        left:  { component: 'TerminalScene', title: '❌ 从零手写组件', language: 'tsx',
+                 code: `// 违反"换数据就复用"，还重复造轮子\nexport const ComparisonScene = () => {\n  return <div className="custom">...</div>;\n};` },
+        right: { component: 'TerminalScene', title: '✅ 只填数据，复用现成组件', language: 'ts',
+                 code: `const comparison = {\n  left:  { title: '传统剪辑',   value: '拖时间轴重排' },\n  right: { title: '代码即视频', value: '改一行配置重渲' },\n};\n// <ComparisonCard {...comparison} /> — TS 字段类型兜底` },
         fallback: 'TerminalScene',
       },
     },
     {
-      id: 'S5b',
-      component: 'SplitLayout',
-      durationSec: 43,
+      id: 'S10', component: 'ScreenshotScene', durationSec: 27.90,
       props: {
-        left: { title: '❌ 顶层读 window', code: 'const w = window.innerWidth // Node崩溃' },
-        right: { title: '✅ typeof 守卫', code: "const w = typeof window !== 'undefined' ? window.innerWidth : 1920" },
-        fallback: 'TerminalScene',
-      },
-    },
-    {
-      id: 'S5c',
-      component: 'ConceptScene',
-      durationSec: 40,
-      props: {
-        heading: '交给 AI 做好',
-        bullets: [
-          '① 填数据 + 套现成组件',
-          '② 规则替AI兜底（MDC自动守卫）',
-          '③ 渲染命令代跑（npx remotion render）',
+        title: '数字主持人 VRMAvatar：只做陪衬串场',
+        callouts: [
+          { at: '取景', text: '整体渲一次，按场景裁半身/全身' },
+          { at: '脚踩稳', text: '在大腿上把髋部摆动反向抵消，脚踩原地' },
+          { at: '边界', text: '坚决不做对口型数字人、不做 AI 假界面' },
         ],
-        sub_component: 'TerminalScene',
-        sub_props: { code: 'npx remotion render --composition=ep02-video-render', typing_speed: 'fast' },
       },
     },
     {
-      id: 'S6',
-      component: 'OutroScene',
-      durationSec: 33,
+      id: 'S11', component: 'SplitLayout', durationSec: 34.24,
       props: {
-        summary: '代码即视频 + 流程即代码 = 工程流水线',
-        cta: '开源仓库在简介，自取',
-        next_episode: '下期：Whisper 毫秒级字幕卡点',
+        left:  { component: 'TerminalScene', title: '❌ 打包阶段就崩', language: 'tsx',
+                 code: `// Remotion 打包跑在 Node 里，没有 window\nconst w = window.innerWidth;  // 💥\n// ReferenceError: window is not defined` },
+        right: { component: 'TerminalScene', title: '✅ 守卫 + 规则一次写死', language: 'tsx',
+                 code: `const getWidth = () =>\n  typeof window !== 'undefined' ? window.innerWidth : 1920;\n\n// .cursor/rules/remotion-ssr.mdc（globs: remotion-composer/src/**）\n// "组件顶层不得直接读 window/document"` },
+        fallback: 'TerminalScene',
+      },
+    },
+    {
+      id: 'S12', component: 'TerminalScene', durationSec: 18.99,
+      props: {
+        title: 'npx remotion render 出片',
+        language: 'bash',
+        code: `cd OpenMontage/remotion-composer\nnpx remotion studio                       # 可视化调试\nnpx remotion render src/index.ts \\\n  <CompositionId> out/ep02.mp4            # 渲染出片`,
+        typing_speed: 'fast',
+        show_progress: true,
+      },
+    },
+    {
+      id: 'S13', component: 'OutroScene', durationSec: 20.07,
+      props: {
+        headline: '整期就两步：用 Vibe Coding 选路线 + 搭引擎',
+        summary: '讲清需求、看住坑、把规则固化给 AI — 没基础也能复制',
+        next_episode: '下期 EP03 字幕匹配：Whisper 让字幕踩着话音跳',
         subscribe_text: '关注，别错过',
+        background: 'gradient',
       },
     },
   ],
@@ -294,13 +251,12 @@ export const ep02Data: EpisodeData = {
 ## Episode.tsx 骨架
 
 ```tsx
-// video/src/episodes/ep02-video-render/Episode.tsx
+// OpenMontage/remotion-composer/src/episodes/ep02-video-render/Episode.tsx
 
 import { Sequence, Audio, staticFile } from 'remotion';
 import {
-  IntroScene, OutroScene, ConceptScene,
-  TableScene, TimelineScene, TerminalScene,
-  SplitLayout, ComparisonCard,
+  IntroScene, OutroScene, ConceptScene, TableScene,
+  TerminalScene, SplitLayout, ScreenshotScene, ComparisonCard,
 } from '../../template';
 import { ep02Data } from './data';
 
@@ -312,21 +268,20 @@ export const Ep02Episode: React.FC = () => {
 
   return (
     <>
-      {/* 音频轨 — 连续播放所有 TTS 段落 */}
+      {/* 音频轨 — 连续播放 13 段 TTS（startSec 来自 06 manifest） */}
       {audio.segments.map((seg) => (
         <Sequence key={seg.id} from={Math.round(seg.startSec * FPS)}>
           <Audio src={staticFile(seg.file)} />
         </Sequence>
       ))}
 
-      {/* 画面轨 — 按场景编排顺序 */}
+      {/* 画面轨 — 13 场景按编排顺序，duration = 对应 TTS 段时长 */}
       {scenes.map((scene) => {
         const from = currentFrame;
         const dur = Math.round(scene.durationSec * FPS);
         currentFrame += dur;
         return (
           <Sequence key={scene.id} from={from} durationInFrames={dur}>
-            {/* 根据 scene.component 渲染对应组件 */}
             <SceneRouter component={scene.component} props={scene.props} />
           </Sequence>
         );
@@ -342,69 +297,66 @@ export const Ep02Episode: React.FC = () => {
 
 ```bash
 # 开发预览
-cd video && npx remotion studio
+cd OpenMontage/remotion-composer && npx remotion studio
 
 # 渲染 16:9 主版本
-npx remotion render --composition=ep02-video-render --output=out/ep02-video-render.mp4
-
-# 渲染 9:16 竖版（可选）
-npx remotion render --composition=ep02-video-render-vertical --output=out/ep02-video-render-vertical.mp4
+npx remotion render src/index.ts ep02-video-render out/ep02-video-render.mp4
 ```
 
 ---
 
 ## 需人工提供的素材（B 轨）
 
-> 来源 = `05-b-roll/README.md`（阶段 `05-b-roll-recording`，当前 `suspended`）。以下三镜逐条对应 04 `b_track_assets_required`，本期均以 A 轨兜底；补录后把 05 改回 `approved` 即可替换：
+> 来源 = `05-b-roll/README.md`（阶段 `05-b-roll-recording`，当前 `suspended`，本期暂缓）。以下逐条对应 04 `b_track_assets_required`，本期均以 A 轨兜底；补录后把 05 改回 `approved` 即可替换：
 
-| 素材 ID | 消费段落 | 描述 | A 轨兜底方案 |
+| 素材 ID | 消费段（04 段 / 音轨段） | 描述 | A 轨兜底方案 |
 |---------|------|------|------------|
-| b-ide-data-driven | 13 / 5a | IDE 录屏：数据驱动复用 @ComparisonCard（✅）vs 从零手写（❌） | `@TerminalScene` 渲染代码对比 |
-| b-ide-ssr-guard | 14 / 5b | IDE 录屏：SSR window 崩溃 → typeof 守卫 → MDC 规则 | `@SplitLayout` + `@TerminalScene` before/after |
-| b-terminal-render | 15 / 5c | 终端录屏：npx remotion render 出片（可选） | `@TerminalScene` 渲染命令 + 进度输出 |
+| b-ide-route-pitfalls | 4 / S04_pitfalls | IDE 录屏：和 AI 对话追问每条路的"不适用+坑" | `@TableScene` 判断层矩阵（highlight 坑列） |
+| b-ide-config-fill | 9 / S09_fill_vs_build | IDE 录屏：从零手写❌ vs 只填数据✅ | `@SplitLayout` 左右 `@TerminalScene` 代码对照 |
+| b-ide-ssr-crash | 11 / S11_ssr | IDE 录屏：顶层读 window 触发 ReferenceError 红屏 | `@SplitLayout` 左 `@TerminalScene` 崩溃代码 |
+| b-ide-ssr-fix | 11 / S11_ssr | IDE 录屏：typeof 守卫 + 写入 .cursor/rules mdc 一次通过 | `@SplitLayout` 右 `@TerminalScene` 守卫代码 |
+| b-term-render | 12 / S12_render | 终端录屏：npx remotion render 出片（可选） | `@TerminalScene` render 命令 + 模拟进度 |
 
 ---
 
 ## 产出路径
 
 ```
-video/src/episodes/ep02-video-render/
-├── data.ts          # 文案与组件配置数据
+OpenMontage/remotion-composer/src/episodes/ep02-video-render/
+├── data.ts          # 文案与组件配置数据（13 场景 + 13 音轨段）
 ├── Episode.tsx      # 场景组装入口
-└── assets/          # TTS 音频（从 06-tts/assets/ 复制或 symlink）
-    ├── S1_intro.wav
-    ├── ...
-    └── S6_cta.wav
+└── assets/          # 13 段 TTS 音频（从 06-tts/assets/ 复制或 symlink）
 
-video/out/
-└── ep02-video-render.mp4  # 渲染成片（待 Remotion 工程就绪后产出）
+OpenMontage/remotion-composer/out/
+└── ep02-video-render.mp4  # 渲染成片（待 Remotion 工程接好新 data 后产出）
 ```
 
 ---
 
 ## 当前状态
 
-- Remotion 运行时环境已成功从 `video/` 迁移并部署至统一的 `OpenMontage/remotion-composer`
-- 成功执行 `align_episode.py` 脚本，生成了毫秒级对齐的 Remotion 渲染属性配置文件
-- 已经完成了本地开发调试，并且使用系统 Chrome 成功完成了 1080p 成片渲染
+- 组装方案已按新 04（13 段）+ 06 重合成（13 段 WAV、363.90s）对齐重写；旧 16 场景结构（含 `@TimelineScene` 七阶段）已弃用。
+- **待办**：把上面的 `data.ts` 接进 `OpenMontage/remotion-composer` 工程、用 13 段新音频重渲 1080p 成片（旧成片基于已废弃的 16 段结构，需重渲）。
+- 全部复用现有组件，无新组件工单；B 轨 5 条均有 A 轨兜底，B 轨补录前可先出 A 轨版。
 
 ```json
 {
   "stage": "07-video-assembly",
   "episode": "ep02-video-render",
-  "total_scenes": 16,
-  "total_duration_seconds": 558,
+  "total_scenes": 13,
+  "total_duration_seconds": 363.90,
+  "audio_source": "06-tts/assets (piper-tts, 13 segments)",
   "track_breakdown": {
-    "a_track_only": 13,
-    "a_track_with_b_fallback": 3
+    "a_track_only": 9,
+    "a_track_with_b_fallback": 4
   },
   "components_used": [
-    "IntroScene", "OutroScene", "ConceptScene", "TableScene",
-    "TimelineScene", "TerminalScene", "SplitLayout", "ComparisonCard"
+    "IntroScene", "ConceptScene", "TableScene", "SplitLayout",
+    "ComparisonCard", "TerminalScene", "ScreenshotScene", "OutroScene"
   ],
   "new_components_required": 0,
-  "remotion_project_status": "completed",
-  "render_ready": true,
-  "blocking_on": null
+  "remotion_project_status": "pending_rewire",
+  "render_ready": false,
+  "blocking_on": "把新 13 段 data.ts 接进 remotion-composer 并重渲"
 }
 ```

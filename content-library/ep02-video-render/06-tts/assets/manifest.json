@@ -2,136 +2,112 @@
   "engine": "piper-tts",
   "model": "zh_CN-huayan-medium",
   "sample_rate": 22050,
-  "total_duration_seconds": 548.76,
-  "total_segments": 16,
+  "total_duration_seconds": 363.9,
+  "total_segments": 13,
   "segments": [
     {
-      "segment_id": "S1_intro",
-      "output_file": "S1_intro.wav",
-      "text_chars": 158,
-      "duration_seconds": 25.08,
-      "file_size_bytes": 1105964,
-      "synthesis_time_seconds": 0.5
+      "segment_id": "S01_open",
+      "output_file": "S01_open.wav",
+      "text_chars": 225,
+      "duration_seconds": 39.28,
+      "file_size_bytes": 1732140,
+      "synthesis_time_seconds": 0.86
     },
     {
-      "segment_id": "S2a_paradigm",
-      "output_file": "S2a_paradigm.wav",
-      "text_chars": 258,
-      "duration_seconds": 42.55,
-      "file_size_bytes": 1876524,
-      "synthesis_time_seconds": 0.79
+      "segment_id": "S02_routes_intro",
+      "output_file": "S02_routes_intro.wav",
+      "text_chars": 100,
+      "duration_seconds": 17.84,
+      "file_size_bytes": 786988,
+      "synthesis_time_seconds": 0.36
     },
     {
-      "segment_id": "S2b_frame_as_state",
-      "output_file": "S2b_frame_as_state.wav",
-      "text_chars": 120,
-      "duration_seconds": 20.77,
-      "file_size_bytes": 916012,
-      "synthesis_time_seconds": 0.41
+      "segment_id": "S03_six_routes",
+      "output_file": "S03_six_routes.wav",
+      "text_chars": 241,
+      "duration_seconds": 32.75,
+      "file_size_bytes": 1444396,
+      "synthesis_time_seconds": 0.68
     },
     {
-      "segment_id": "S2c_six_routes",
-      "output_file": "S2c_six_routes.wav",
-      "text_chars": 314,
-      "duration_seconds": 43.37,
-      "file_size_bytes": 1912876,
-      "synthesis_time_seconds": 0.8
+      "segment_id": "S04_pitfalls",
+      "output_file": "S04_pitfalls.wav",
+      "text_chars": 323,
+      "duration_seconds": 50.36,
+      "file_size_bytes": 2221100,
+      "synthesis_time_seconds": 1.04
     },
     {
-      "segment_id": "S3a_judgment_matrix",
-      "output_file": "S3a_judgment_matrix.wav",
-      "text_chars": 381,
-      "duration_seconds": 59.73,
-      "file_size_bytes": 2634284,
-      "synthesis_time_seconds": 1.11
+      "segment_id": "S05_why_remotion",
+      "output_file": "S05_why_remotion.wav",
+      "text_chars": 155,
+      "duration_seconds": 25.89,
+      "file_size_bytes": 1141804,
+      "synthesis_time_seconds": 0.64
     },
     {
-      "segment_id": "S3b_remotion_reasons",
-      "output_file": "S3b_remotion_reasons.wav",
-      "text_chars": 288,
-      "duration_seconds": 40.97,
-      "file_size_bytes": 1806892,
-      "synthesis_time_seconds": 0.72
+      "segment_id": "S06_vs_html",
+      "output_file": "S06_vs_html.wav",
+      "text_chars": 202,
+      "duration_seconds": 24.94,
+      "file_size_bytes": 1099820,
+      "synthesis_time_seconds": 0.65
     },
     {
-      "segment_id": "S3c_comparison",
-      "output_file": "S3c_comparison.wav",
-      "text_chars": 164,
-      "duration_seconds": 20.91,
-      "file_size_bytes": 922156,
-      "synthesis_time_seconds": 0.39
-    },
-    {
-      "segment_id": "S3d_tradeoffs",
-      "output_file": "S3d_tradeoffs.wav",
-      "text_chars": 171,
-      "duration_seconds": 27.27,
-      "file_size_bytes": 1202732,
-      "synthesis_time_seconds": 0.53
-    },
-    {
-      "segment_id": "S4a_pipeline",
-      "output_file": "S4a_pipeline.wav",
-      "text_chars": 172,
-      "duration_seconds": 29.56,
-      "file_size_bytes": 1303596,
+      "segment_id": "S07_dispatch",
+      "output_file": "S07_dispatch.wav",
+      "text_chars": 212,
+      "duration_seconds": 26.55,
+      "file_size_bytes": 1170988,
       "synthesis_time_seconds": 0.55
     },
     {
-      "segment_id": "S4b_three_piece",
-      "output_file": "S4b_three_piece.wav",
-      "text_chars": 170,
-      "duration_seconds": 23.78,
-      "file_size_bytes": 1048620,
+      "segment_id": "S08_config",
+      "output_file": "S08_config.wav",
+      "text_chars": 132,
+      "duration_seconds": 18.58,
+      "file_size_bytes": 819244,
+      "synthesis_time_seconds": 0.38
+    },
+    {
+      "segment_id": "S09_fill_vs_build",
+      "output_file": "S09_fill_vs_build.wav",
+      "text_chars": 175,
+      "duration_seconds": 26.51,
+      "file_size_bytes": 1168940,
+      "synthesis_time_seconds": 0.6
+    },
+    {
+      "segment_id": "S10_avatar",
+      "output_file": "S10_avatar.wav",
+      "text_chars": 153,
+      "duration_seconds": 27.9,
+      "file_size_bytes": 1230380,
+      "synthesis_time_seconds": 0.68
+    },
+    {
+      "segment_id": "S11_ssr",
+      "output_file": "S11_ssr.wav",
+      "text_chars": 274,
+      "duration_seconds": 34.24,
+      "file_size_bytes": 1509932,
+      "synthesis_time_seconds": 0.72
+    },
+    {
+      "segment_id": "S12_render",
+      "output_file": "S12_render.wav",
+      "text_chars": 167,
+      "duration_seconds": 18.99,
+      "file_size_bytes": 837676,
       "synthesis_time_seconds": 0.44
     },
     {
-      "segment_id": "S4c_orchestrator",
-      "output_file": "S4c_orchestrator.wav",
-      "text_chars": 199,
-      "duration_seconds": 23.89,
-      "file_size_bytes": 1053740,
-      "synthesis_time_seconds": 0.44
-    },
-    {
-      "segment_id": "S4d_ab_track",
-      "output_file": "S4d_ab_track.wav",
-      "text_chars": 300,
-      "duration_seconds": 41.05,
-      "file_size_bytes": 1810476,
-      "synthesis_time_seconds": 0.74
-    },
-    {
-      "segment_id": "S5a_data_driven",
-      "output_file": "S5a_data_driven.wav",
-      "text_chars": 246,
-      "duration_seconds": 34.16,
-      "file_size_bytes": 1506348,
-      "synthesis_time_seconds": 0.61
-    },
-    {
-      "segment_id": "S5b_ssr_guard",
-      "output_file": "S5b_ssr_guard.wav",
-      "text_chars": 336,
-      "duration_seconds": 42.93,
-      "file_size_bytes": 1893420,
-      "synthesis_time_seconds": 0.81
-    },
-    {
-      "segment_id": "S5c_ai_render",
-      "output_file": "S5c_ai_render.wav",
-      "text_chars": 278,
-      "duration_seconds": 40.28,
-      "file_size_bytes": 1776172,
-      "synthesis_time_seconds": 0.75
-    },
-    {
-      "segment_id": "S6_cta",
-      "output_file": "S6_cta.wav",
-      "text_chars": 209,
-      "duration_seconds": 32.45,
-      "file_size_bytes": 1431084,
-      "synthesis_time_seconds": 0.58
+      "segment_id": "S13_cta",
+      "output_file": "S13_cta.wav",
+      "text_chars": 141,
+      "duration_seconds": 20.07,
+      "file_size_bytes": 885292,
+      "synthesis_time_seconds": 0.42
     }
   ]
 }
