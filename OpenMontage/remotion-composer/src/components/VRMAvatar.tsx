@@ -250,16 +250,32 @@ const VRMModel: React.FC<VRMModelProps> = ({
 
     // Weight shift through the hips with a soft counter-rotation in the spine
     // (contrapposto) so the idle never looks rigid.
+    const hipYaw = sway * 0.05 + sway2 * 0.03;
+    const hipRoll = sway * 0.02;
     const hips = h.getNormalizedBoneNode(VRMHumanBoneName.Hips);
     if (hips) {
-      hips.rotation.y = sway * 0.05 + sway2 * 0.03;
-      hips.rotation.z = sway * 0.02;
-      hips.position.x = sway * 0.012;
+      hips.rotation.y = hipYaw;
+      hips.rotation.z = hipRoll;
     }
     const spine = h.getNormalizedBoneNode(VRMHumanBoneName.Spine);
     if (spine) {
       spine.rotation.y = -sway * 0.035;
       spine.rotation.z = -sway * 0.015;
+    }
+
+    // Keep the feet planted. The legs hang off the hips, so the pelvis sway
+    // above swings the whole lower body and makes the feet float and shuffle.
+    // Cancel the pelvis yaw/roll on the upper legs so the leg chain (and the
+    // feet) stays upright and grounded while the hips still shift weight.
+    const lUpperLeg = h.getNormalizedBoneNode(VRMHumanBoneName.LeftUpperLeg);
+    const rUpperLeg = h.getNormalizedBoneNode(VRMHumanBoneName.RightUpperLeg);
+    if (lUpperLeg) {
+      lUpperLeg.rotation.y = -hipYaw;
+      lUpperLeg.rotation.z = -hipRoll;
+    }
+    if (rUpperLeg) {
+      rUpperLeg.rotation.y = -hipYaw;
+      rUpperLeg.rotation.z = -hipRoll;
     }
 
     const lUpper = h.getNormalizedBoneNode(VRMHumanBoneName.LeftUpperArm);
