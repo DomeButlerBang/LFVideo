@@ -4,7 +4,7 @@ status: draft
 source_workflow: /03-video-planning-bilibili
 upstream_inputs:
   - 02-plan/README.md (status: draft)
-  - 02-plan/tutorial.final.md (status: draft)
+  - 02-plan/tutorial.final.md (status: approved)
   - shared/docs/remotion-spec.md
 ---
 

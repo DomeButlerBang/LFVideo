@@ -17,7 +17,7 @@
 |----|---------|---------|------------|---------|----------|--------|---------|--------|-------|--------|--------|--------|--------|------|
 | **《Vibe Coding 造一条自动化视频生产线》** | | | | | | | | | | | | | | |
 | ep01-video-agent-overview | - | - | - | - | - | - | - | - | - | - | - | - | - | 总览 · 系列总览/总结（含技术选型复盘）；最后制作、发布置顶第 1 期 |
-| ep02-video-render | approved | draft | draft | draft | suspended | draft | draft | draft | suspended | suspended | suspended | suspended | suspended | 视频渲染 · 场景组件系统 + VRM 主持人（本期）；02 软文+分镜、03 视听编排已按"教人用 Vibe Coding"两步主线重做（draft 待复核），04→07 待续 |
+| ep02-video-render | approved | draft | draft | draft | suspended | draft | draft | draft | suspended | suspended | suspended | suspended | suspended | 视频渲染 · 场景组件系统 + VRM 主持人（本期）；02 软文(tutorial.final 已 approved)+分镜、03 视听编排、04 脚本已按"教人用 Vibe Coding"两步主线重做（03/04 draft 待复核），05→07 待续 |
 | ep03-video-subtitle | - | - | - | - | - | - | - | - | - | - | - | - | - | 字幕匹配 · Whisper 字级时间戳驱动弹跳字幕 |
 | ep04-video-audio | - | - | - | - | - | - | - | - | - | - | - | - | - | 音频混音 · 智能混音、气口与响度标准化 |
 | ep05-video-pipeline | - | - | - | - | - | - | - | - | - | - | - | - | - | 工作流构建 · 13 阶段状态机 + Schema 校验门 |

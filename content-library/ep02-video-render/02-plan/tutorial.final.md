@@ -1,7 +1,7 @@
 ---
 stage: 02-content-planning
 kind: human-final
-status: draft
+status: approved
 source_workflow: /02-content-planning
 ---
 
