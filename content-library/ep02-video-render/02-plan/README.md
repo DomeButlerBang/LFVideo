@@ -7,7 +7,7 @@ source_workflow: /02-content-planning
 # ep02 内容策划方案（视频大纲与分镜落盘版）
 ## 系列定位：【AI 视频自动化生产线】第 2 期：渲染引擎篇
 
-本文件由教学软文提炼生成，专用于指导下游的 **03 视听编排** 与 **04 脚本撰写**。分镜主线严格对齐 tutorial 现行结构：**范式与痛点 → 判断层矩阵 → 选型理由 → 流程即代码 → 实操与避坑**。
+本文件由教学软文提炼生成，专用于指导下游的 **03 视听编排** 与 **04 脚本撰写**。分镜主线严格对齐 `tutorial.final.md`的「教人用 Vibe Coding」两步主线：**开场（结果先行） → 用 Vibe Coding 选路线（多路线/不适用+坑/为什么 Remotion） → 用 Vibe Coding 搭引擎（配置分发/配置即内容/主持人/避坑/出片） → 总结+EP03 预告**。流程即代码/角色编排已按分期移出本期（归 EP05/EP06）。
 
 > 📁 **本期 02-plan 文件分工与生成/修改约定（重要，先读）**
 > - **`tutorial.md` = 自动产物（AI 生成线）**：由 `/02-content-planning` 阶段4 生成，真相源="AI 生成了什么"。**请勿在此文件上做人工定稿**——它可能被重新生成覆盖。
@@ -27,43 +27,43 @@ source_workflow: /02-content-planning
 
 ---
 
-## 2. 视频分镜结构（6 段式，对齐 tutorial 主线）
+## 2. 视频分镜结构（对齐 tutorial「教人用 Vibe Coding」两步主线）
 
-### 第一段：开头黄金钩子（目标：30 秒）
-- **核心论点**：传统剪辑是“轨道 + 绝对时间轴”的低 ROI 体力活；Video-as-Code 把一条视频变成**声明式代码/数据**，由渲染器编译成帧——因此可版本控制、可参数化批量复用、可被 AI 端到端接管。
+### 第一段：开场钒子（目标：30 秒）
+- **核心论点**：传统剪辑是在时间轴上一帧帧拖、改一处要回去重排的体力活；我没有前后端基础，靠 Vibe Coding（讲需求、AI 写、人判断）把视频写成一份配置，改一行就重新自动出片。本期拆两步：① 用 Vibe Coding 选技术路线；② 用 Vibe Coding 搭 Remotion 渲染引擎。
 - **叙事节奏 (Beat Type)**：`statement`
 - **视觉焦点 (Visual Priority)**：`text`
-- **画面视觉**：`@IntroScene` 科技感大字报渐入，配“数字渲染生产线”隐喻动画（代码/数据 → 帧传送带 → MP4）。
+- **画面视觉**：`@IntroScene` 大字报渐入主副标题；配“改一行配置→重新编译出片”的隐喻动画，末尾给出“第一步选路线 / 第二步搭引擎”两步路线图。
 
-### 第二段：范式本质·帧即状态·不止 React（目标：2 分钟）
-- **核心论点**：一句话本质是**帧即状态（Frame as State）**——给定时间点，渲染器算出该刻画面。且“代码即视频 ≠ Remotion”，它是一类范式，有 6 条路线（React/DOM、TS 声明式动画、程序化数学动画、像素合成、Canvas/游戏引擎、命令式合成），共享同一内核：用代码/数据描述 → 编译成帧 → 合成视频。
+### 第二段：用 Vibe Coding 选路线①——让 AI 把路都摆出来（目标：50 秒）
+- **核心论点**：没基础的人最容易卡在“工具那么多选哪个”。做法不是自己啼文档，而是把选择题丢给 AI：让它摆出“把视频写成代码”的多条路线（Remotion / Motion Canvas·Revideo / Manim / MoviePy / PixiJS·Cocos / FFmpeg），点明它们内核都一样——用代码/数据描述画面 → 程序编译成帧 → 合成视频。
 - **叙事节奏 (Beat Type)**：`transformation`
 - **视觉焦点 (Visual Priority)**：`mixed`
-- **画面视觉**：`@ConceptScene` 用 2D 卡片讲“帧即状态”心智模型；再切到六条路线的概念卡片阵列（路线 × 代表项目 × 典型场景）。
+- **画面视觉**：`@ConceptScene` 用一句话讲清“代码描述→编译成帧→合成”的共同内核；切到六条路线的卡片阵列（路线 × 代表工具 × 适合干什么）。
 
-### 第三段：判断层矩阵与选型理由（目标：3 分钟）
-- **核心论点**：以“边界与验收”为护城河，把 6 个开源方案摆进判断层矩阵（适用/不适用/已知坑/验收标准/证据状态）；在“固定模板 + 内容批量替换 + AI 端到端接管 + 跨期可维护”的约束下，**Remotion 胜出**（数据驱动模板、TS 类型安全、AI 友好、CLI 原生），并用 `Remotion ✅ vs HyperFrames ❌` 对照点明“要付的税”（需懂 React / BUSL 授权 / SSR 环境坑）。
+### 第三段：用 Vibe Coding 选路线②——逼 AI 给“不适用 + 坑”，回到约束定 Remotion（目标：90 秒）
+- **核心论点**：AI 默认给四平八稳的“百科式”好话对比，没用；真正帮你决策的是每条路“什么时候不好使、会在哪翻车”。所以追问“各自不适用场景 + 已知坑”，人盯着“坑”那一列做减法。再把自己的约束讲清楚（一期一个固定模板、换数据批量出几十期 / 让 AI 改内容不易错 / 跨期好维护），Remotion 胜出；并和“复制粘贴 HTML”土办法对照，代价（React 栈 + BUSL 授权）如实说。
 - **叙事节奏 (Beat Type)**：`comparison`
 - **视觉焦点 (Visual Priority)**：`chart`
-- **画面视觉**：`@TableScene` 渲染判断层矩阵（逐行 stagger 入场、高亮当前讲解行）；穿插 `@SplitLayout` 做 `Remotion vs HyperFrames` 左右对照。
+- **画面视觉**：`@TableScene` 渲染“方案 / 适合 / 不适合 / 已知坑”判断层矩阵（逐行 stagger 入场、高亮当前行、重点高亮“坑”列）；穿插 `@SplitLayout` 做 `Remotion ✅ vs 复制粘贴 HTML ❌` 左右对照。
 
-### 第四段：流程即代码（Dogfooding，目标：2.5 分钟）
-- **核心论点**：既然画面能用代码控制，制作视频的**内容工作流本身也做成代码**——角色=`system_prompt`、工作流=`user_prompt`、产物 frontmatter=状态机；七阶段流水线（01→07）+ 一个 `python-frontmatter` 最小编排器即可驱动；本期录屏跑的是一段可复现的提示词链。这才是频道真正的护城河。
-- **叙事节奏 (Beat Type)**：`transformation`
-- **视觉焦点 (Visual Priority)**：`code`
-- **画面视觉**：`@TimelineScene` 横向展开“01 选题 → 07 归档”七阶段流水线（逐阶段点亮）；切入代码框展示编排器伪代码与提示词链。
-
-### 第五段：核心实操与避坑（目标：2.5 分钟）
-- **核心论点**：去掉“多少行代码”执念，强调工程结构——**首选数据驱动现成组件**（只改 data 复用 `@ComparisonCard` ✅，而非从零手写 `ComparisonScene.tsx` ❌）；唯一要守的纪律是别在模块顶层碰 `window/document`，用 `.cursor/rules/remotion-ssr.mdc` 把这笔“税”一次性封死；最后给验收标准与渲染命令。
+### 第四段：用 Vibe Coding 搭引擎①——配置分发 + 配置即内容（目标：90 秒）
+- **核心论点**：搭引擎也不靠手写，靠和 AI 把“配置”和“现成组件”对上。仓库渲染引擎 `OpenMontage/remotion-composer` 的干活方式：写一份配置说清“这段是什么画面、上面叠什么”，主程序 `Explainer` 按 `type` 字段自动分发到对应组件（`comparison`/`terminal_scene`/`screenshot_scene`/`charts`/`ConceptScene`·`SplitLayout`…）。做内容 = 挑组件、填字段；让 AI 填数据、别造组件，TypeScript 字段类型兑底，填错即编译报错。
 - **叙事节奏 (Beat Type)**：`demonstration`
 - **视觉焦点 (Visual Priority)**：`code`
-- **画面视觉**：`@SplitLayout` 左右对照——左“从零手写/顶层读 window 崩溃 ❌”，右“数据驱动 + SSR 守卫一次通过 ✅”；末尾 `@TerminalScene` 演示 `npx remotion render` 出片。
+- **画面视觉**：`@ConceptScene`/图示讲“配置 → Explainer 按 type 分发 → 组件”的流向；`@TerminalScene` 展示一份 `comparison` 配置 JSON；`@SplitLayout` 左“让 AI 从零手写组件 ❌”右“只填数据复用现成组件 ✅”。
+
+### 第五段：用 Vibe Coding 搭引擎②——数字主持人 + 避坑 + 一行出片（目标：90 秒）
+- **核心论点**：① 数字主持人 `VRMAvatar` 只做陪衷、不是主角：渲一次按场景取景、要站得稳（修法=在大腿上反向抵消高部摆动让脚踩稳）、坚决不做对口型数字人；② 唯一反复踩的坑——别在组件顶层直接读 `window`，否则打包阶段崩，用 `.cursor/rules/remotion-ssr.mdc` 把守卫规则一次写死交给 AI；③ 出片就是一行 `npx remotion render`，交给 AI/终端跑。
+- **叙事节奏 (Beat Type)**：`demonstration`
+- **视觉焦点 (Visual Priority)**：`code`
+- **画面视觉**：主持人“脚踩稳”取景示意；`@SplitLayout` 左“顶层读 window 打包崩溃 ❌”右“typeof 守卫 + MDC 规则一次通过 ✅”（A 轨 `@TerminalScene` 兑底）；末尾 `@TerminalScene` 演示 `npx remotion render` 出片进度。
 
 ### 第六段：结尾 CTA
-- **核心论点**：掌握“代码即视频 + 流程即代码”，内容生产从手工活变成可维护的工程流水线。关注我，下期解密 Whisper 毫秒级字幕与卡点。
+- **核心论点**：整期就两步——用 Vibe Coding 选路线（AI 铺信息+列坑，人对约束拍板）、用 Vibe Coding 搭引擎（填配置、套组件、规则兑底、AI 跑渲染）；没有编程基础也能复制。关注我，下期 EP03 字幕匹配：用 Whisper 字级时间戳驱动 `CaptionOverlay`，让字幕踩着话音跳。
 - **叙事节奏 (Beat Type)**：`conclusion`
 - **视觉焦点 (Visual Priority)**：`text`
-- **画面视觉**：`@OutroScene` 展示开源仓库地址与关注引导。
+- **画面视觉**：`@OutroScene` 展示开源仓库地址与关注引导，回扣“两步法 + 没基础也能复制”。
 
 ---
 
@@ -83,9 +83,6 @@ source_workflow: /02-content-planning
    - **验证方法与判断标准**：只编写 `data` 配置喂入 `@ComparisonCard`，在 `npx remotion studio` 中渲染出左右对比卡片且无类型/渲染报错。
 3. **假设 3**：`charts/` 组件能否承接标题承诺的“图表动效”。
    - **验证方法与判断标准**：喂一组数据给 `charts/` 组件，渲染出带入场动画的图表且数值正确。
-4. **假设 4（流程即代码）**：一个 `python-frontmatter` 最小编排器是否能扫描 frontmatter 状态机端到端推进流水线。
-   - **验证方法与判断标准**：写最小调度脚本扫描 `status: approved` 的产物，自动加载对应角色/工作流并触发下一阶段（A 轨全自动，B 轨挂起等真人录屏）。
-
 ---
 
 ## 4. 结构化校验块 (JSON Schema Block)
@@ -171,10 +168,6 @@ source_workflow: /02-content-planning
       "assumption": "charts/ 组件能否承接标题承诺的图表动效",
       "verification_method": "喂一组数据给 charts/ 组件，渲染出带入场动画的图表且数值正确"
     },
-    {
-      "assumption": "python-frontmatter 最小编排器能否扫描 frontmatter 状态机端到端推进流水线",
-      "verification_method": "写最小调度脚本扫描 status: approved 的产物，自动加载对应角色/工作流触发下一阶段（B 轨挂起等真人录屏）"
-    }
   ],
   "demo_design": {
     "project_context": "React 18 / TypeScript 5 / Remotion 4.0；A 轨组件位于 OpenMontage/remotion-composer（src/components 通用组件 + src/custom-templates 模板场景/原语，video/ 工程已并入）",
@@ -189,43 +182,43 @@ source_workflow: /02-content-planning
   },
   "outline_sections": [
     {
-      "section_name": "开头黄金钩子",
-      "key_point": "弃用时间轴拖拽，Video-as-Code 把视频变成声明式代码/数据：可版本控制、可批量复用、可被 AI 接管",
+      "section_name": "开场钒子",
+      "key_point": "没前后端基础，靠 Vibe Coding 把视频写成配置、改一行就自动出片；本期两步：选路线、搭引擎",
       "beat_type": "statement",
       "visual_priority": "text",
       "scene_template": "@IntroScene"
     },
     {
-      "section_name": "范式本质·帧即状态·不止 React",
-      "key_point": "一句话本质=帧即状态；代码即视频是一类范式有 6 条路线，共享“代码描述→编译成帧→合成视频”内核",
+      "section_name": "选路线①·让 AI 摆出多条路线",
+      "key_point": "把选择题丢给 AI：Remotion/Motion Canvas·Revideo/Manim/MoviePy/PixiJS·Cocos/FFmpeg，内核都是“代码描述→编译成帧→合成”",
       "beat_type": "transformation",
       "visual_priority": "mixed",
       "scene_template": "@ConceptScene"
     },
     {
-      "section_name": "判断层矩阵与选型理由",
-      "key_point": "6 方案按边界/验收入矩阵；在固定模板+AI友好+跨期可维护约束下 Remotion 胜出，并点明要付的税",
+      "section_name": "选路线②·逼 AI 给不适用+坑，回到约束定 Remotion",
+      "key_point": "追问每条路的不适用与已知坑、人盯坑做减法；按固定模板批量/AI友好/跨期维护约束选定 Remotion，vs 复制粘贴 HTML，代价如实说",
       "beat_type": "comparison",
       "visual_priority": "chart",
       "scene_template": "@TableScene"
     },
     {
-      "section_name": "流程即代码（Dogfooding）",
-      "key_point": "角色=system_prompt/工作流=user_prompt/frontmatter=状态机，七阶段流水线+编排器伪代码+提示词链",
-      "beat_type": "transformation",
+      "section_name": "搭引擎①·配置分发与配置即内容",
+      "key_point": "一份配置→Explainer 按 type 分发到现成组件；做内容=挑组件填字段，让 AI 填数据别造组件，TS 类型兑底",
+      "beat_type": "demonstration",
       "visual_priority": "code",
-      "scene_template": "@TimelineScene"
+      "scene_template": "@SplitLayout"
     },
     {
-      "section_name": "核心实操与避坑",
-      "key_point": "首选数据驱动现成 @ComparisonCard ✅ 而非从零手写 ❌；用 MDC 规则把 SSR window 守卫一次性封死",
+      "section_name": "搭引擎②·数字主持人+避坑+一行出片",
+      "key_point": "VRMAvatar 只做陪衷要站得稳、坚决不做对口；顶层读 window 会崩→MDC 规则封死；出片一行 npx remotion render",
       "beat_type": "demonstration",
       "visual_priority": "code",
       "scene_template": "@SplitLayout"
     },
     {
       "section_name": "结尾 CTA",
-      "key_point": "代码即视频+流程即代码把内容生产做成工程流水线；关注博主，下期详解 Whisper 毫秒级字幕卡点",
+      "key_point": "两步法回顾+没基础也能复制；下期 EP03 字幕匹配用 Whisper 字级时间戳驱动 CaptionOverlay",
       "beat_type": "conclusion",
       "visual_priority": "text",
       "scene_template": "@OutroScene"
