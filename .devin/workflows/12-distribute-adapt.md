@@ -2,6 +2,8 @@
 description: 分发适配 - 把完片适配到小红书、知乎、抖音等平台，自动输出契合各平台推荐逻辑的标题、描述、话题标签，规划短视频切片方案。
 ---
 
+<!-- AUTO-GENERATED from shared/workflows/12-distribute-adapt.md. Do not edit here; edit the source and run `python scripts/sync_workflows.py`. -->
+
 # 分发适配 Workflow (12-distribute-adapt)
 
 基于上游定稿的**质检通过成片（11）**，调用 `分发助手` 角色，完成多平台（小红书、知乎、抖音、B站、YouTube 等）的文案适配、发布标题、话题标签设计与短视频切片策略。
@@ -117,5 +119,5 @@ source_workflow: /12-distribute-adapt
 ## 关联文件
 
 - 角色：`shared/roles/content/distributor(分发助手).md`
-- 上游：`11-qa-review (成片质检).md`
-- 下游：`13-github-archive (资源归档).md`
+- 上游：`11-qa-review.md`
+- 下游：`13-github-archive.md`

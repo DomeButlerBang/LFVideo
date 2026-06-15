@@ -1,6 +1,4 @@
----
-description: B站视听策划 - 读取上游故事大纲与 tutorial.final.md（口播内容真相源），自动生成 Remotion 组件映射、Props 接口、动画 Cue、录屏 zoom 指令，完成从"故事 + 必讲要点"到"可执行视频蓝图"的技术编排。
----
+<!-- AUTO-GENERATED from shared/workflows/03-video-planning-bilibili.md. Do not edit here; edit the source and run `python scripts/sync_workflows.py`. -->
 
 # B站视听策划 Workflow (03-video-planning-bilibili)
 
@@ -96,6 +94,6 @@ description: B站视听策划 - 读取上游故事大纲与 tutorial.final.md（
 ## 关联文件
 
 - 角色：`shared/roles/content/visual-planner(视听策划师).md`
-- 上游：`02-content-planning (内容策划).md`
+- 上游：`02-content-planning.md`
 - 内容真相源：`content-library/<epNN-slug>/02-plan/tutorial.final.md`
-- 下游：`04-script-draft (脚本撰写).md`
+- 下游：`04-script-draft.md`

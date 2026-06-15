@@ -1,6 +1,4 @@
----
-description: 脚本撰写 - 调用文案撰稿人角色，把策划案和技术验证结果写成完整视频脚本（分轨台词）及多平台分发改写稿。
----
+<!-- AUTO-GENERATED from shared/workflows/04-script-draft.md. Do not edit here; edit the source and run `python scripts/sync_workflows.py`. -->
 
 # 脚本撰写 Workflow (04-script-draft)
 
@@ -169,5 +167,5 @@ source_workflow: /04-script-draft
 ## 关联文件
 
 - 角色：`shared/roles/content/copywriter(文案撰稿人).md`
-- 上游：`03-video-planning-bilibili (B站视听策划).md`
-- 下游：`05-b-roll-recording (B轨录屏).md`、`06-tts-synthesis (TTS语音合成).md`
+- 上游：`03-video-planning-bilibili.md`
+- 下游：`05-b-roll-recording.md`、`06-tts-synthesis.md`

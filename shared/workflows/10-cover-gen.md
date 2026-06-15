@@ -1,4 +1,7 @@
 ---
+title: 封面生成
+slug: 10-cover-gen
+stage: "10"
 description: 封面生成 - 为各平台生成封面/缩略图（B站16:9、抖音9:16、小红书1:1），遵循高点击率封面设计规范。
 ---
 
@@ -138,6 +141,6 @@ source_workflow: /10-cover-gen
 
 ## 关联文件
 
-- 上游：`09-bgm-mix (BGM与混音).md`
-- 下游：`11-qa-review (成片质检).md`
+- 上游：`09-bgm-mix.md`
+- 下游：`11-qa-review.md`
 - OpenMontage 工具：`tools/analysis/frame_sampler.py`、`tools/video/showcase_card.py`、`tools/graphics/image_selector.py`

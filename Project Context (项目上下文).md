@@ -83,7 +83,7 @@
 
 ## 内容生产状态机（13 阶段 + 校验门）
 
-每期都走同一条标准化流水线，工作流定义在 `.devin/workflows/`，产物落 `content-library/epNN-slug/` 的对应阶段目录：
+每期都走同一条标准化流水线，工作流真相源在 `shared/workflows/<slug>.md`（IDE 无关，由 `scripts/sync_workflows.py` 物化到 `.devin/workflows/`、`.windsurf/workflows/`、`.cursor/commands/` 供各 IDE 以 `/<slug>` 调用），产物落 `content-library/epNN-slug/` 的对应阶段目录：
 
 ```
 01 选题 → 02 策划 → 03 B站视听 → 04 脚本(SSOT) → 05 B轨录屏⏸ → 06 TTS
@@ -108,7 +108,7 @@
 | 实战内容线（4） | 产品经理 / 架构师 / 执行工程师 / 代码审查员 | 🚧 占位 |
 | 通用判断层（1） | 判断层评审（CHAI 硬核质量门） | ⏸️ 已挂起 |
 
-多 IDE 适配（single source of truth = `shared/roles/`）：本仓库根用 `.devin/`（`rules/` 常驻规则 + `workflows/` 步骤）；`OpenMontage/` 子工程另带 `.cursor/ .claude/ .agents/` 技能。
+多 IDE 适配（single source of truth = `shared/`）：**角色**在 `shared/roles/`、**工作流**在 `shared/workflows/`（均 IDE 无关）；各 IDE 的可调用副本由 `scripts/sync_workflows.py` 生成到 `.devin/workflows/`、`.windsurf/workflows/`、`.cursor/commands/`（勿手改）。`.devin/rules/` 常驻规则与各 IDE 规则适配将在后续 PR 一并收敛。`OpenMontage/` 子工程另带 `.cursor/ .claude/ .agents/` 技能。
 
 ---
 

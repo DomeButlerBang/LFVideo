@@ -1,6 +1,4 @@
----
-description: 成片质检 - 自动 + 人工检测成片的画面质量、字幕、音频、防静止合规性，确保发布前无低级错误。
----
+<!-- AUTO-GENERATED from shared/workflows/11-qa-review.md. Do not edit here; edit the source and run `python scripts/sync_workflows.py`. -->
 
 # 成片质检 Workflow (11-qa-review)
 
@@ -169,6 +167,6 @@ content-library/<epNN-slug>/11-qa/
 
 ## 关联文件
 
-- 上游：`10-cover-gen (封面生成).md`
-- 下游：`12-distribute-adapt (分发适配).md`
+- 上游：`10-cover-gen.md`
+- 下游：`12-distribute-adapt.md`
 - OpenMontage 工具：`tools/analysis/visual_qa.py`、`tools/analysis/video_understand.py`、`tools/analysis/scene_detect.py`、`tools/analysis/audio_energy.py`、`tools/analysis/composition_validator.py`

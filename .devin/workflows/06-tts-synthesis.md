@@ -2,6 +2,8 @@
 description: TTS语音合成 - 将 04 脚本的口播文本转为语音音频，支持多引擎选择（豆包/OpenAI/ElevenLabs/Google/Piper），产出可直接嵌入 Remotion 的 voice.wav。
 ---
 
+<!-- AUTO-GENERATED from shared/workflows/06-tts-synthesis.md. Do not edit here; edit the source and run `python scripts/sync_workflows.py`. -->
+
 # TTS语音合成 Workflow (06-tts-synthesis)
 
 将 04 脚本中的 `[口播]` 文本逐段合成为语音音频文件，供 07-video-assembly 阶段使用。支持 OpenMontage 的 `tts_selector` 自动选择最优 TTS 引擎，也可人工录音替代。
@@ -138,6 +140,6 @@ source_workflow: /06-tts-synthesis
 
 ## 关联文件
 
-- 上游：`04-script-draft (脚本撰写).md`
-- 下游：`07-video-assembly (视频组装).md`
+- 上游：`04-script-draft.md`
+- 下游：`07-video-assembly.md`
 - OpenMontage 工具：`tools/audio/tts_selector.py`、`tools/audio/doubao_tts.py`、`tools/audio/openai_tts.py`、`tools/audio/elevenlabs_tts.py`、`tools/audio/google_tts.py`、`tools/audio/piper_tts.py`

@@ -1,0 +1,7 @@
+# Workflow source of truth + generated IDE copies: force LF so sync_workflows.py
+# --check never reports false drift across Windows/macOS/Linux.
+shared/workflows/**.md   text eol=lf
+.devin/workflows/**.md    text eol=lf
+.windsurf/workflows/**.md text eol=lf
+.cursor/commands/**.md    text eol=lf
+scripts/sync_workflows.py text eol=lf

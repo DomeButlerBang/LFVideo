@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: sync-workflows-check
+        name: workflows IDE copies in sync with shared/workflows
+        entry: python scripts/sync_workflows.py --check
+        language: system
+        pass_filenames: false
+        files: ^(shared/workflows/|\.devin/workflows/|\.windsurf/workflows/|\.cursor/commands/|scripts/sync_workflows\.py)

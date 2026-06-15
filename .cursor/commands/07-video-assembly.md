@@ -1,6 +1,4 @@
----
-description: 视频组装 - 调用视频工程师角色，用 Remotion 把脚本组装成可渲染成片。
----
+<!-- AUTO-GENERATED from shared/workflows/07-video-assembly.md. Do not edit here; edit the source and run `python scripts/sync_workflows.py`. -->
 
 # 视频组装 Workflow (07-video-assembly)
 
@@ -114,5 +112,5 @@ video/src/
 ## 关联文件
 
 - 角色：`shared/roles/execution/motion-engineer(视频工程师).md`
-- 上游：`04-script-draft (脚本撰写).md`、`05-b-roll-recording (B轨录屏).md`、`06-tts-synthesis (TTS语音合成).md`
-- 下游：`08-subtitle-gen (字幕生成).md`
+- 上游：`04-script-draft.md`、`05-b-roll-recording.md`、`06-tts-synthesis.md`
+- 下游：`08-subtitle-gen.md`

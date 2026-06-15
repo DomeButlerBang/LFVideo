@@ -1,4 +1,7 @@
 ---
+title: B轨录屏
+slug: 05-b-roll-recording
+stage: "05"
 description: B轨录屏 - 按 03 视听蓝图的 zoom_crop_directives 录制 IDE/终端操作演示，产出可直接嵌入 Remotion @VideoSlot 的 B 轨素材。
 ---
 
@@ -112,6 +115,6 @@ source_workflow: /05-b-roll-recording
 
 ## 关联文件
 
-- 上游：`04-script-draft (脚本撰写).md`、`03-video-planning-bilibili (B站视听策划).md`
-- 下游：`07-video-assembly (视频组装).md`
+- 上游：`04-script-draft.md`、`03-video-planning-bilibili.md`
+- 下游：`07-video-assembly.md`
 - OpenMontage 工具：`tools/capture/screen_recorder.py`、`tools/capture/cap_recorder.py`、`tools/capture/screen_capture_selector.py`

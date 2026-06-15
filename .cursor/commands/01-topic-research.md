@@ -1,6 +1,4 @@
----
-description: 选题分析 - 批量生成选题池，多维度打分，人工选择后深度分析
----
+<!-- AUTO-GENERATED from shared/workflows/01-topic-research.md. Do not edit here; edit the source and run `python scripts/sync_workflows.py`. -->
 
 # 选题分析 Workflow
 

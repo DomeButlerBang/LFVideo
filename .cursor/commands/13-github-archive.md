@@ -1,6 +1,4 @@
----
-description: 资源归档 - 清理开发过程中的临时文件与缓存，整理出干净、优雅的开源代码，打包 Prompts 与 Rules，撰写面向社区的高质量 README，并将配套资源同步至 GitHub 仓库。
----
+<!-- AUTO-GENERATED from shared/workflows/13-github-archive.md. Do not edit here; edit the source and run `python scripts/sync_workflows.py`. -->
 
 # 资源归档 Workflow (13-github-archive)
 
@@ -85,4 +83,4 @@ source_workflow: /13-github-archive
 ## 关联文件
 
 - 角色：`shared/roles/execution/engineer(执行工程师).md`
-- 上游：`12-distribute-adapt (分发适配).md`
+- 上游：`12-distribute-adapt.md`

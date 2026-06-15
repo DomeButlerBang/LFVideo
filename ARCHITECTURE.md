@@ -8,10 +8,15 @@
 
 ```
 ai-ide-workflows/ (项目根目录)
-├── .windsurf/ workflows/       # Windsurf Workflows 原生编排规则
-├── shared/                     # 跨 IDE 共享资源
-│   ├── roles/                  # 核心角色定义 (Single Source of Truth)
+├── shared/                     # 跨 IDE 共享资源 (Single Source of Truth)
+│   ├── roles/                  # 核心角色定义
+│   ├── workflows/              # 13 阶段工作流真相源 (IDE 无关，纯 ASCII 文件名)
+│   ├── docs/                   # 组件规格等
 │   └── schemas/                # L0.5 严苛双核校验的 JSON Schema
+├── .devin/workflows/           # [生成] Devin 工作流副本（由 sync 脚本物化，勿手改）
+├── .windsurf/workflows/        # [生成] Windsurf 原生 Workflows 副本（/<slug> 调用）
+├── .cursor/commands/           # [生成] Cursor slash 命令副本（/<slug> 调用）
+├── scripts/sync_workflows.py   # 把 shared/workflows 物化到各 IDE 目录（--check 防漂移）
 ├── content-library/            # 内容库 (按 epNN 分类，纯净不含 React 模板代码)
 │   └── ep02-video-render/      # 视频生产全生命周期文件 (01-07 阶段)
 └── OpenMontage/                # [单运行时核心] Python 生产流水线与 React 19 渲染双引擎
@@ -65,9 +70,14 @@ ai-ide-workflows/ (项目根目录)
 ## 4. 单一事实源原则 (Single Source of Truth)
 
 - **角色定义**：所有角色（如 `copywriter`, `strategist`）仅在 `shared/roles/` 维护一份 Markdown 文件。
-- **IDE 适配**：
+- **工作流定义**：13 阶段工作流仅在 `shared/workflows/<slug>.md` 维护一份（IDE 无关，纯 ASCII 文件名，中文名在 frontmatter `title`）。各 IDE 实际调用的副本由 `scripts/sync_workflows.py` **生成**，不手改：
+  - **Devin**：`.devin/workflows/<slug>.md`
+  - **Windsurf**：`.windsurf/workflows/<slug>.md`（原生 Workflows，`/<slug>` 调用）
+  - **Cursor**：`.cursor/commands/<slug>.md`（slash 命令，`/<slug>` 调用）
+  - 改完真相源后跑 `python scripts/sync_workflows.py`；`--check` 模式（已接入 pre-commit）保证生成副本永不漂移。
+- **IDE 规则适配（rules，后续 PR 收敛）**：
   - **Cursor**：通过 `.cursor/rules/*.mdc` 进行被动约束，仅做**路径指向与适配**，不复制角色内容。
-  - **Windsurf**：通过 `.windsurf/rules/` 与 `.windsurf/workflows/*.md` 进行主动编排，同样采用软链接/相对引用指向 `shared/roles/`。
+  - **Windsurf**：通过 `.windsurf/rules/` 进行主动约束，同样采用相对引用指向 `shared/roles/`。
 
 ---
 

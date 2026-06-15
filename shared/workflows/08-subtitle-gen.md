@@ -1,4 +1,7 @@
 ---
+title: 字幕生成
+slug: 08-subtitle-gen
+stage: "08"
 description: 字幕生成 - 基于 TTS 音频或成片，用 Whisper 生成逐字时间戳，产出 SRT/VTT 字幕文件，可选 Remotion 弹跳字幕烧录。
 ---
 
@@ -146,6 +149,6 @@ source_workflow: /08-subtitle-gen
 
 ## 关联文件
 
-- 上游：`07-video-assembly (视频组装).md`
-- 下游：`09-bgm-mix (BGM与混音).md`
+- 上游：`07-video-assembly.md`
+- 下游：`09-bgm-mix.md`
 - OpenMontage 工具：`tools/analysis/transcriber.py`、`tools/subtitle/subtitle_gen.py`、`tools/video/remotion_caption_burn.py`

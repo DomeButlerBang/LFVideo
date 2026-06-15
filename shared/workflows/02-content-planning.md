@@ -1,4 +1,7 @@
 ---
+title: 内容策划
+slug: 02-content-planning
+stage: "02"
 description: 内容策划 - 基于标题进行技术调研与多方案判断层对比，选定技术路线与待验证假设，最终完成分镜导演大纲与结构化策划案。
 ---
 
@@ -132,6 +135,6 @@ New-Item -ItemType File -Path "content-library/$slug/01-topic/README.md", "conte
 ## 关联文件
 
 - 角色：`shared/roles/content/strategist(内容策划师).md`
-- 上游：`01-topic-research (选题分析).md`
-- 下游：`03-video-planning-bilibili (B站视听策划).md`
+- 上游：`01-topic-research.md`
+- 下游：`03-video-planning-bilibili.md`
 - 校验：`shared/schemas/02-plan.schema.json`

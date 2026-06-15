@@ -2,6 +2,8 @@
 description: BGM与混音 - 为成片选配背景音乐、音效，执行口播/BGM/音效多轨混音与响度标准化。
 ---
 
+<!-- AUTO-GENERATED from shared/workflows/09-bgm-mix.md. Do not edit here; edit the source and run `python scripts/sync_workflows.py`. -->
+
 # BGM与混音 Workflow (09-bgm-mix)
 
 为 07 组装成片选配背景音乐（BGM）和音效（SFX），使用 OpenMontage `audio_mixer` 完成多轨混音：口播人声为主、BGM 自动闪避（ducking）、整体响度标准化至 -14 LUFS（B站推荐）。
@@ -174,6 +176,6 @@ source_workflow: /09-bgm-mix
 
 ## 关联文件
 
-- 上游：`08-subtitle-gen (字幕生成).md`
-- 下游：`10-cover-gen (封面生成).md`
+- 上游：`08-subtitle-gen.md`
+- 下游：`10-cover-gen.md`
 - OpenMontage 工具：`tools/audio/audio_mixer.py`、`tools/audio/pixabay_music.py`、`tools/audio/suno_music.py`、`tools/audio/music_gen.py`、`tools/audio/freesound_music.py`

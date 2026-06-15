@@ -45,7 +45,7 @@
 
 ## 标准化生产流水线（13 阶段状态机）
 
-每期都走同一条流水线。工作流定义在 `.devin/workflows/`，产物按阶段落 `content-library/epNN-slug/`：
+每期都走同一条流水线。工作流真相源在 `shared/workflows/<slug>.md`（IDE 无关，经 `scripts/sync_workflows.py` 物化到各 IDE 目录，`/<slug>` 调用），产物按阶段落 `content-library/epNN-slug/`：
 
 ```
 01 选题 → 02 策划 → 03 B站视听 → 04 脚本(SSOT) → 05 B轨录屏⏸ → 06 TTS
