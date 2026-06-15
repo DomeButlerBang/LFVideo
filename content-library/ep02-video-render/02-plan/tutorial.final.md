@@ -39,36 +39,37 @@ source_workflow: /02-content-planning
 
 ### 1. 场景与组件系统（A 轨成片的积木）
 
-A 轨组件封装在 `OpenMontage/remotion-composer/src/` 下两处——通用组件在 `components/`，模板场景/原语在 `custom-templates/`（`verified` 存在，名称以 `remotion-spec.md` §1.9 映射为准）：
+组件都封装好了（`verified` 存在）：通用组件在 `src/components/`，成套场景/原语在 `src/custom-templates/`。观众看到的每一类画面，背后都对应一个组件，由配置里的 `type` 字段点名：
 
-| 组件 | 实际位置 | 用途 | 本期用法 |
-| :--- | :--- | :--- | :--- |
-| `@ComparisonCard` | `components/` | 横向对比卡片 | 范式/方案对比 |
-| `@TerminalScene` | `components/` | 终端模拟器 | 展示 `render` 命令与输出 |
-| `@ScreenshotScene` | `components/` | 截图自适应变焦 | 嵌入 IDE 截图并 Zoom |
-| `charts/`（bar/line/pie/kpi） | `components/` | 图表卡片 | 标题里的「图表动效」归宿 |
-| `@ConceptScene` / `@SplitLayout` | `custom-templates/` | 概念卡片 / 左右分屏 | 范式与机制的图解 |
-| `@CaptionOverlay` | `components/` | 字幕高亮叠层 | 仅留接口，**字幕卡点见 EP03** |
+| 配置 `type` → 组件 | 在哪 | 做什么 |
+| :--- | :--- | :--- |
+| `comparison` → `ComparisonCard` | components/ | 左右对比卡 |
+| `terminal_scene` → `TerminalScene` | components/ | **合成终端动画**：命令+输出逐行打出，无需真录 |
+| `screenshot_scene` → `ScreenshotScene` | components/ | 丢一张截图，脚本化叠光标/点击/打字——15–30s 聚焦演示可以假乱真 |
+| `bar_chart`/`line_chart`/`pie_chart`/`kpi_grid` → `charts/` | components/ | 图表动效 |
+| `ConceptScene` / `SplitLayout` | custom-templates/ | 概念图解 / 左右分屏 |
+| overlay：`section_title`/`stat_reveal`/`provider_chip` | components/ | 小节标题 / 角标 / 模型轮播 |
+| `CaptionOverlay` | components/ | 字幕高亮（接口已留，**卡点见 EP03**） |
 
-> 关键认知：观众看到的每一类画面，背后都是一个**可复用、类型化的组件**；做一期内容 ≈ 选组件 + 喂数据，而不是从零摆时间轴。
+> 关键认知：做一期内容 ≈ **挑组件、填字段**，而不是从零摆时间轴。完整 `type` 清单见 `SCENE_TYPES.md`。
 
-### 2. 数据驱动模板：只填数据，不造组件
+### 2. 配置即内容：填字段，不造组件
 
-Remotion 的四层结构 `theme / primitives / scenes / episodes` 让"模板与数据分离"：每期的内容落在 `data.ts`，由 `Episode.tsx` 组装现成场景，主题样式集中在 `template/`。理想用法是**只改数据、不碰组件**——这才是"数据驱动模板"：
+渲染引擎不靠"每期写新组件"，而靠**一份配置**：把视频拆成一串 `cut`（主画面）和 `overlay`（叠层），每个对象就一个 `type` + 几个字段，`Explainer` 按 `type` 找到组件渲染。做一期 ≈ 挑 `type`、填字段：
 
-```ts
-// ✅ 只产出数据，复用类型化组件
-const comparison = {
-  left:  { title: '方案 A', points: ['...'], status: 'error' },
-  right: { title: '方案 B', points: ['...'], status: 'success' },
-};
-// <ComparisonCard {...comparison} />
-
-// ❌ 反面：为这期从零手写一个全新的 ComparisonScene.tsx，
-//    既违反"固定模板 + 内容替换"，又忽略了仓库里现成的 @ComparisonCard。
+```jsonc
+// ✅ 只写配置：一个 comparison cut，Explainer 自动渲成对比卡
+{
+  "type": "comparison",
+  "title": "传统剪辑 vs 代码即视频",
+  "leftLabel": "传统剪辑",   "leftValue": "拖时间轴，改一处全手工重排",
+  "rightLabel": "代码即视频", "rightValue": "改一行配置，重新编译出片"
+}
+// ❌ 反面：为这期从零手写一个 ComparisonScene.tsx——
+//    既重复造轮子，又破坏了"配置即内容、组件可复用"的模板复用性。
 ```
 
-TypeScript 在这里是安全网：每期换数据时格式不出错，改一处主题全期生效——这也是"跨期可复用"的来源。
+TypeScript 给每个 `type` 的字段做类型约束：填错、漏填，编译期就报错。这就是"跨期换数据不翻车"的底气——也是为什么这套流程交给 AI 最稳：它只填格式固定的字段，幻觉空间被压到最小。
 
 ---
 
@@ -125,8 +126,8 @@ npx remotion render src/index.ts <CompositionId> out/demo.mp4
 ## 五、总结
 
 - **Video-as-Code 是范式**：用代码/数据描述、编译成帧——本期把这台编译器（remotion-composer）拆开看。
-- **渲染引擎 = 配置 → 分发 → 组件 → 帧**：`Explainer` 按 `cut.type`/`overlay.type` 分发到 `@ComparisonCard / @TerminalScene / charts / …` 等类型化组件。
-- **数据驱动模板**：只填 `data.ts`、复用现成组件，TypeScript 兜底跨期复用；从零手写组件是反面。
+- **渲染引擎 = 配置 → 分发 → 组件 → 帧**：`Explainer` 按 `cut.type`/`overlay.type` 分发到 `ComparisonCard / TerminalScene / charts / …` 等类型化组件。
+- **配置即内容**：挑 `type`、填字段、复用现成组件，TypeScript 字段类型兜底；从零手写组件是反面。
 - **数字主持人只做陪衬**：站得稳（脚不飘）、按场景取景；坚决不做对口型数字人（反噱头）。
 - **据实标注**：未实测的命令/注册名一律标 `paper_spec`，录制前由 AI 跑一次核对。
 
@@ -147,8 +148,8 @@ npx remotion render src/index.ts <CompositionId> out/demo.mp4
 
 ### 二、渲染引擎：场景/组件系统
 - [ ] `Explainer` 按 `cut.type`/`overlay.type` 声明式分发场景/叠层
-- [ ] 组件清单：`@ComparisonCard / @TerminalScene / @ScreenshotScene / charts / @ConceptScene·@SplitLayout`
-- [ ] 数据驱动模板 `data.ts → Episode.tsx → template/`：只填数据、复用组件 ✅ vs 从零手写 ❌
+- [ ] 组件清单：`ComparisonCard / TerminalScene / ScreenshotScene / charts / ConceptScene·SplitLayout`；合成终端/截图无需真录
+- [ ] 配置即内容：写 `cut`/`overlay` 配置（挑 `type`+填字段）、复用组件 ✅ vs 从零手写 ❌；TypeScript 字段类型兜底
 
 ### 三、数字主持人（基础版）
 - [ ] `VRMAvatar` 定位 = 陪衬主持，渲染一次、按场景取景预设裁剪
